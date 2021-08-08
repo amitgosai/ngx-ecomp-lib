@@ -1,0 +1,13 @@
+{
+  "name": "ngx-ecomp-lib",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^12.1.2",
+    "@angular/core": "^12.1.2",
+    "@angular/fire": "^6.1.5",
+    "ngx-cookie-service": "^12.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.2.0"
+  }
+}
