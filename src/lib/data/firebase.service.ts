@@ -9,7 +9,7 @@ import { LocalStoreService } from '../data/local-store.service';
 import { AppValidations } from 'ecomp-lib/validations/validation';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FbDbOperations, FbWhereClause } from 'ecomp-lib/data/firebase';
+import { fbDbOps, FbWhereClause } from 'ecomp-lib/data/firebase';
 
 type CollectionPredicate<T> = string | AngularFirestoreCollection<T>; 
 type DocumentPredicate<T> = string | AngularFirestoreDocument<T>; 
@@ -66,7 +66,7 @@ export class FirebaseService {
     }
 
     switch (opType) {
-      case FbDbOperations.add:
+      case fbDbOps.add:
         newData.createdBy = userID!;
         newData.createdOn = timestamp!; 
         newData.updatedBy = userID!;  
@@ -75,15 +75,15 @@ export class FirebaseService {
         newData.deletedBy = "";
         newData.deletedOn = null; 
         break;
-      case FbDbOperations.set: 
+      case fbDbOps.set: 
         newData.updatedBy = userID!; 
         newData.updatedOn = timestamp; 
         break;
-      case FbDbOperations.update: 
+      case fbDbOps.update: 
         newData.updatedBy = userID!; 
         newData.updatedOn = timestamp!;
         break; 
-      case FbDbOperations.softdelete: 
+      case fbDbOps.softdelete: 
         newData.isDeleted = true; 
         newData.deletedBy = userID!; 
         newData.deletedOn = timestamp!; 
@@ -221,7 +221,7 @@ export class FirebaseService {
   }
 
   public addDoc<T>(ref: CollectionPredicate<T>, data: T): Promise<T> {
-    const docData = this.setTimestamp(FbDbOperations.add, data); 
+    const docData = this.setTimestamp(fbDbOps.add, data); 
 
     const promise = new Promise<T>((resolve, reject) => {
       this.coll(ref).add(docData)
@@ -237,7 +237,7 @@ export class FirebaseService {
   }
 
   public setDoc<T extends {id?: string}>(ref: CollectionPredicate<T>, data: T): Promise<T> {
-    const docData = this.setTimestamp(FbDbOperations.set, data); 
+    const docData = this.setTimestamp(fbDbOps.set, data); 
 
     const promise = new Promise<T>((resolve, reject) => {
       this.coll(ref).doc<T>(docData.id).set(docData)
@@ -249,7 +249,7 @@ export class FirebaseService {
   }
 
   public updateDoc<T extends {id?: string}>(ref: CollectionPredicate<T>, data: T): Promise<T> {
-    const docData = this.setTimestamp(FbDbOperations.update, data); 
+    const docData = this.setTimestamp(fbDbOps.update, data); 
 
     const promise = new Promise<T>((resolve, reject) => {
       this.coll(ref).doc<T>(docData.id).update(docData)
@@ -261,7 +261,7 @@ export class FirebaseService {
   }
 
   public softDeleteDoc<T>(ref: CollectionPredicate<T>, data: T): Promise<T> {
-    const docData = this.setTimestamp(FbDbOperations.softdelete, data); 
+    const docData = this.setTimestamp(fbDbOps.softdelete, data); 
 
     const promise = new Promise<T>((resolve, reject) => {
       this.coll(ref).doc<T>(docData.id).update(docData)
