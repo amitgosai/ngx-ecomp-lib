@@ -11,3 +11,5 @@ export * from './lib/navigation/ip-service.service';
 export * from './lib/ngx-ecomp-lib.service';
 export * from './lib/ngx-ecomp-lib.component';
 export * from './lib/ngx-ecomp-lib.module';
+
+export * from './lib/security/safe-html.pipe'; 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Router, NavigationExtras, QueryParamsHandling } from '@angular/router'; 
+import { Location } from '@angular/common'; 
+import { Router, NavigationExtras, QueryParamsHandling, NavigationEnd } from '@angular/router'; 
 import { AppValidations } from 'ecomp-lib/validations/validation'; 
 
 @Injectable({
@@ -7,16 +8,23 @@ import { AppValidations } from 'ecomp-lib/validations/validation';
 })
 export class AppNavigationService {
 
-  private static errTitle?: string; 
-  private static errMessage?: string; 
-  public static isPageError: boolean = false; 
+  private errTitle?: string; 
+  private errMessage?: string; 
+  public isPageError: boolean = false; 
+  private hist: string[] = []; 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private location: Location) { 
+    router.events.subscribe((event) => {
+      if(event instanceof NavigationEnd) {
+        this.hist.push(event.urlAfterRedirects); 
+      }
+    }); 
+  }
 
-  public static navigate(router: Router, navigateTo: string, errorMessage?: string, returnUrl?: string, qryParamsHand?: QueryParamsHandling, errorTitle?: string, pageAnchor?: string) {
+  public navigate(navigateTo: string, errorMessage?: string, returnUrl?: string, qryParamsHand?: QueryParamsHandling, errorTitle?: string, pageAnchor?: string) {
     let objQueryParam = {returnUrl, errorTitle, errorMessage}; 
 
-    if (!(router === null || router == undefined)) {
+    if (!(this.router === null || this.router == undefined)) {
         if (!(navigateTo === null || navigateTo == undefined || navigateTo == '')) {
             if(!(returnUrl === null || returnUrl == undefined || returnUrl == '')) {
                 objQueryParam["returnUrl"] = returnUrl; 
@@ -47,14 +55,14 @@ export class AppNavigationService {
             }
             
             //console.log(objQueryParam); 
-            router.navigate([navigateTo], navigationExtras); 
+            this.router.navigate([navigateTo], navigationExtras); 
         } else {
-            router.navigate([navigateTo]); 
+            this.router.navigate([navigateTo]); 
         }
     }
   }
 
-  public static handleAppError(router: Router, err: any, navigateToUrl:string = "/apperror", errTitle?: string, errMsg?: string, returnUrl?: string, qryPrmHand?: QueryParamsHandling) {
+  public handleAppError(err: any, navigateToUrl:string = "/apperror", errTitle?: string, errMsg?: string, returnUrl?: string, qryPrmHand?: QueryParamsHandling) {
     if(AppValidations.isNullOrEmpty(errTitle)) {
       this.errTitle = "An Error Occurred"; 
     } else {
@@ -69,6 +77,20 @@ export class AppNavigationService {
     this.isPageError = true; 
 
     //We want to redirect user here. 
-    this.navigate(router, navigateToUrl, this.errMessage, returnUrl, qryPrmHand, this.errTitle); 
+    this.navigate(navigateToUrl, this.errMessage, returnUrl, qryPrmHand, this.errTitle); 
+  }
+
+  public back(): void {
+    try {
+      //Pop the last history element. 
+      this.hist.pop(); 
+      if(this.hist.length > 0) {
+        this.location.back(); 
+      } else {
+        this.router.navigateByUrl("/"); 
+      }
+    } catch (err) {
+      //In case of any error, don't navigate. 
+    }
   }
 }

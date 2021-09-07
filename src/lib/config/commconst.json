@@ -1,0 +1,49 @@
+{
+    "accessLevel": {
+        "ALL": "All", 
+        "ALL_CHILDREN": "All Children", 
+        "SPECIFIC_CHILDREN": "Specific Children"
+    }, 
+    "responseCodes": {
+        "SUCCESS": "SUCCESS", 
+        "VALIDATION_MESSAGE": "VALIDATION_MESSAGE",   
+        "INVALID_REQUEST": "INVALID_REQUEST", 
+        "INVALID_PARAM": "INVALID_PARAM", 
+        "PARAM_MISSING": "PARAM_MISSING", 
+        "USER_NOT_FOUND": "USER_NOT_FOUND",
+        "PAGE_NOT_FOUND": "PAGE_NOT_FOUND", 
+        "NO_DATA": "NO_DATA", 
+        "DATA_DELETED": "DATA_DELETED", 
+        "DATA_FETCH_ERROR": "DATA_FETCH_ERROR", 
+        "DATA_WRITE_ERROR": "DATA_WRITE_ERROR", 
+        "UNHANDLED_ERROR": "UNHANDLED_ERROR", 
+        "NOT_AUTHORIZED": "NOT_AUTHORIZED"
+    }, 
+    "SMSTxnTypes": {
+        "TXN": "TXN", 
+        "PROMO": "PROMO"
+    }, 
+    "ExternalAPIUrls": {
+        "IPify": "https://api64.ipify.org?format=json"
+    }, 
+    "localStoreKeys": {
+        "appID": "appID", 
+        "appName": "appName", 
+        "tagLine": "tagLine",
+        "userID": "userID",
+        "userDetails": "userDetails", 
+        "userGPSCountry": "userGPSCountry", 
+        "userSelectedCountry": "userSelectedCountry",
+        "allCountries": "allCountries", 
+        "locationServiceEnable": "locationServiceEnable", 
+        "isMobile": "isMobile", 
+        "isTablet": "isTablet",
+        "isDesktop": "isDesktop", 
+        "deviceInfo": "deviceInfo",
+        "screenSize": "screenSize", 
+        "isMobileScreenSize": "isMobileScreenSize", 
+        "isTabletScreenSize": "isTabletScreenSize",
+        "isDesktopScreenSize": "isDesktopScreenSize",
+        "selectedCompany": "selectedCompany"
+    }
+}

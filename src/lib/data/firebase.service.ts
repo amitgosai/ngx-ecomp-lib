@@ -44,7 +44,15 @@ export class FirebaseService {
   }
 
   public getServerTimestamp() {
-    return firebase.firestore.FieldValue.serverTimestamp(); 
+    return firebase.firestore.FieldValue.serverTimestamp();
+  }
+
+  public get firestore() {
+    return firebase.firestore; 
+  }
+
+  public getDateValue(fsDate: any) {
+    return new firebase.firestore.Timestamp(fsDate._seconds, fsDate._nanoseconds).toDate(); 
   }
 
   //Return GeoPoint Data Refrence to store as GeoPoint in Firestore. 
@@ -301,36 +309,4 @@ export class FirebaseService {
     }); 
   }
 
-
-  /**
-   * To initialize the Firestore Database as default. 
-   * CAUTION: ONLY RUN THIS IF YOU DON'T HAVE FIRESTORE SETUP. OTEHRWISE, IT WILL PERMENANTLY DELETE ALL YOUR FIRESTORE DATA. 
-   */
-  public initializeFirestore = new Observable<string>((observer) => {
-    try {
-      observer.next("Connecting to Firestore..."); 
-      observer.next("Initializing Core Database Structure for First Use...");
-
-      //#region Applications
-      /*************************
-       * Applications
-       *************************/
-        observer.next("**************************************"); 
-        observer.next("Creating Applications/eCompanyAdmin..."); 
-        let eCompAdmin = {
-            id: "eCompanyAdmin", 
-            name: "eCompany Administration", 
-            tagLine: "Business With Intelligence"
-        }
-        this.addDoc("applications/eCompanyAdmin", eCompAdmin); 
-        observer.next("Applications/eCompanyAdmin Created"); 
-        //#endregion Applications
-
-    } catch (error) {
-      console.log("An Error occurred while creating database ...."); 
-      observer.error(error); 
-    } finally {
-      observer.complete(); 
-    }
-  }); 
 }
