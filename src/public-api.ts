@@ -5,6 +5,11 @@
 export * from './lib/data/local-store.service'; 
 export * from './lib/data/firebase.service'; 
 
+export * from './lib/comms/comms.module'; 
+export * from './lib/comms/comms.service'; 
+
+export * from './lib/error/error.interceptor';
+
 export * from './lib/navigation/app-navigation.service'; 
 export * from './lib/navigation/ip-service.service'; 
 

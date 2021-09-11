@@ -1,4 +1,14 @@
 {
+    "ErrorType:": {
+        "Error": "Error", 
+        "Warning": "Warning", 
+        "Info": "Info", 
+        "None": ""
+    }, 
+    "UserIDType": {
+        "Email": "Email", 
+        "Mobile": "Mobile"
+    },
     "accessLevel": {
         "ALL": "All", 
         "ALL_CHILDREN": "All Children", 
@@ -31,6 +41,8 @@
         "appName": "appName", 
         "tagLine": "tagLine",
         "userID": "userID",
+        "authToken": "authToken",
+        "fbUser": "fbUser",
         "userDetails": "userDetails", 
         "userGPSCountry": "userGPSCountry", 
         "userSelectedCountry": "userSelectedCountry",
@@ -45,5 +57,66 @@
         "isTabletScreenSize": "isTabletScreenSize",
         "isDesktopScreenSize": "isDesktopScreenSize",
         "selectedCompany": "selectedCompany"
+    }, 
+    "fbErrorCodes": {
+        "auth": {
+            "userNotFound": {
+                "code": "auth/user-not-found", 
+                "errorCode": "auth/user-not-found",
+                "title": "User Not Found", 
+                "message": "User does not exists or deleted", 
+                "type": "Info"
+            }, 
+            "emailAlreadyInUse": {
+                "code": "auth/email-already-in-use",
+                "errorCode": "auth/email-already-in-use", 
+                "title": "User Name already taken", 
+                "message": "The email address already in use by another account.",
+                "type": "Info"
+            }, 
+            "invalidPhoneNumber": {
+                "code": "auth/invalid-phone-number", 
+                "errorCode": "auth/invalid-phone-number",
+                "title": "Phone number invalid",
+                "message": "The phone number must be E.164 standard compliant"
+            },
+            "phoneNumberAlreadyExists": {
+                "code": "auth/phone-number-already-exists", 
+                "errorCode": "auth/phone-number-already-exists", 
+                "title": "Phone Number already taken", 
+                "message": "Phone number already in use by another account",
+                "type": "Info"
+            },
+            "wrongPassword": {
+                "code": "auth/wrong-password",
+                "errorCode": "auth/wrong-password",
+                "title": "Invalid Login", 
+                "message": "Incorrect Password", 
+                "type": "Info"
+            }, 
+            "networkRequestFailed": {
+                "code": "auth/network-request-failed", 
+                "errorCode": "auth/network-request-failed", 
+                "title": "Network unavailable", 
+                "message": "Network unavailable", 
+                "type": "Info"
+            }
+        }, 
+        "storage": {
+            "Unauthorized": {
+                "code": "storage/unauthorized", 
+                "errorCode": "403", 
+                "title": "Cannot upload file/document", 
+                "message": "Cannot upload file/document due to large size", 
+                "type": "Info"
+            }, 
+            "ObjectNotFound": {
+                "code": "storage/object-not-found", 
+                "errorCode": "404", 
+                "title": "File/Document not found", 
+                "message": "Uploaded file/document not found", 
+                "type": "Info"
+            }
+        }
     }
 }

@@ -108,20 +108,13 @@
         "mailTemplate": "mailTemplate"
       }
     }, 
-    "mailOTPs": {
-      "collection": "mailOTPs", 
+    "transactionOTPs": {
+      "collection": "transactionOTPs", 
       "doc": {
-        "email": "email", 
+        "receiverId": "receiverId", 
         "otp": "otp"
       }
-    }, 
-    "smsOTPs": {
-      "collection": "smsOTPs", 
-      "doc": {
-        "mobileNumber": "mobileNumber", 
-        "otp": "otp"
-      }
-    }, 
+    },
     "jobTitles": {
       "collection": "jobTitles", 
       "doc": {
